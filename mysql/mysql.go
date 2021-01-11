@@ -1,14 +1,21 @@
 package mysql
 
 import (
+	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	. "login/conf"
 )
 
 var err error
 var SqlDB *gorm.DB
 
 func init() {
-	dsn := "root:123456@tcp(192.168.137.200:3306)/"
-	gorm.Open()
+	dsn := fmt.Sprintf("%s:%s@%s(%s:%d)/%s?parseTime=True&%s",
+		SqlConf.User, SqlConf.Password, SqlConf.Protocl, SqlConf.Host, SqlConf.Port, SqlConf.DBName, SqlConf.Args)
+	SqlDB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
+		fmt.Println("mysql connect err=", err)
+		return
+	}
 }
