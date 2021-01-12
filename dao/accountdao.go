@@ -14,7 +14,11 @@ func AccountCreate(c *gin.Context) {
 	if err != nil {
 		c.String(http.StatusNotFound, "create account err = %s", err.Error())
 	} else {
-
+		if err := lib.CreateAccount(account.AccountName, account.PassWord); err != nil {
+			c.String(http.StatusNotFound, "create account err = %s", err.Error())
+		} else {
+			c.String(http.StatusOK, "create ok")
+		}
 	}
 }
 

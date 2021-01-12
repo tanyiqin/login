@@ -1,17 +1,17 @@
 package conf
 
 import (
+	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 )
 
 var (
-	conf Config
-	SqlConf = conf.mysqlConf
+	SqlConf MySqlConf
 )
 
 type Config struct {
-	mysqlConf *MySqlConf
+	MySqlConf `yaml:"mysql"`
 }
 
 type MySqlConf struct {
@@ -25,6 +25,7 @@ type MySqlConf struct {
 }
 
 func init() {
+	var conf Config
 	confData, err := ioutil.ReadFile("conf/conf.yaml")
 	if err != nil {
 		panic(1)
@@ -32,7 +33,22 @@ func init() {
 	}
 	err = yaml.Unmarshal(confData, &conf)
 	if err != nil {
+		fmt.Print("umarshal err =",err)
 		panic(2)
 		return
 	}
+	SqlConf = conf.MySqlConf
+	//yfile, err := os.Open("conf/conf.yaml")
+	//defer yfile.Close()
+	//if err != nil {
+	//	log.Panic("err in conf Open yaml,err=%v", err)
+	//}
+	//ydecode := yaml.NewDecoder(yfile)
+	//
+	//var c Config
+	//err = ydecode.Decode(&c)
+	//if err != nil {
+	//	log.Panic("err in conf Decode,err=%v", err)
+	//}
+	//conf = c
 }

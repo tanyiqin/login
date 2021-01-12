@@ -1,8 +1,8 @@
 mysql:
-  user: 'tony'
-  password: '123456'
-  protocl: 'tcp'
-  host: 'localhost'
+  user: "root"
+  password: "123456"
+  protocl: "tcp"
+  host: "192.168.137.200"
   port: 3306
-  dbname: 'login_server'
-  args: ''
+  dbname: "login_server"
+  args: ""

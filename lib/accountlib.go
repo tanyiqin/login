@@ -1,9 +1,6 @@
 package lib
 
 import (
-	"crypto"
-	"crypto/md5"
-	"encoding/hex"
 	"login/model"
 	"login/mysql"
 )
@@ -28,6 +25,9 @@ func GetAccountByID(AccountID int) (model.AccountInfo, error) {
 func CreateAccount(AccountName string, Password string) error {
 	accountInfo := model.AccountInfo{}
 	accountInfo.AccountName = AccountName
-	md5.New()
-	hex.Encode()
+	md5, salt := MD5(Password, 32)
+	accountInfo.Salt = string(salt)
+	accountInfo.PassWord = string(md5)
+	accountInfo.SdkType = SdkTypeDefault
+	return mysql.SqlDB.Table("account_info").Create(&accountInfo).Error
 }
