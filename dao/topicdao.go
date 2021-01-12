@@ -2,17 +2,29 @@ package dao
 
 import (
 	"github.com/gin-gonic/gin"
+	"login/lib"
 	"login/model"
 	"net/http"
+	"strconv"
 )
 
 func AccountCreate(c *gin.Context) {
-	account := model.Account{}
+	account := model.AccountInfo{}
 	err := c.Bind(&account)
 	if err != nil {
-		c.String(http.StatusBadRequest, "create account err = %s", err.Error())
+		c.String(http.StatusNotFound, "create account err = %s", err.Error())
 	} else {
 
+	}
+}
+
+func AccountInfo(c *gin.Context) {
+	AccountName := c.DefaultQuery("account_name", "")
+	SdkType, _ := strconv.Atoi(c.DefaultQuery("sdk_type", "0"))
+	if accountInfo, err := lib.GetAccountByName(AccountName, SdkType); err != nil {
+		c.String(http.StatusNotFound, "get account err = %s", err.Error())
+	} else {
+		c.JSON(http.StatusOK, accountInfo)
 	}
 }
 

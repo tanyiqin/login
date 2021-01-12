@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"login/dao"
 )
 
 func main() {
@@ -24,7 +25,8 @@ func main() {
 	//}
 	accountGroup := router.Group("/account")
 	{
-		accountGroup.POST("/create", )
+		accountGroup.POST("/create", dao.AccountCreate)
+		accountGroup.GET("/info", dao.AccountInfo)
 	}
 	router.Run()
 }

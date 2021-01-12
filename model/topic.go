@@ -1,8 +1,15 @@
 package model
 
-type Account struct {
-	AccountName string `form:"account_name"`
-	PassWord string `form:"password"`
+import "time"
+
+type AccountInfo struct {
+	AccountID	int64	`form:"account_id" gorm:"account_id" json:"account_id"`
+	AccountName string `form:"account_name" binding:"required" gorm:"account_name" json:"account_name"`
+	SdkType	int `form:"sdk_type" gorm:"sdk_type" json:"sdk_type"`
+	PassWord string `form:"password" gorm:"password" json:"-"`
+	Salt	string `gorm:"salt" json:"-"`
+	CreateTime	time.Time `gorm:"create_time,autoCreateTime" json:"-"`
+	UpdateTime	time.Time `gorm:"update_time,autoUpdateTime" json:"-"`
 }
 
 //type Topic struct {

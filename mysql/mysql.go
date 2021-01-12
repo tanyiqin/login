@@ -18,4 +18,5 @@ func init() {
 		fmt.Println("mysql connect err=", err)
 		return
 	}
+
 }
