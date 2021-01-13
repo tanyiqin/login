@@ -25,9 +25,10 @@ func GetAccountByID(AccountID int) (model.AccountInfo, error) {
 func CreateAccount(AccountName string, Password string) error {
 	accountInfo := model.AccountInfo{}
 	accountInfo.AccountName = AccountName
-	md5, salt := MD5(Password, 32)
+	salt := Salt()
+	md5 := MD5(Password, salt)
 	accountInfo.Salt = string(salt)
-	accountInfo.PassWord = string(md5)
+	accountInfo.PassWord = md5
 	accountInfo.SdkType = SdkTypeDefault
 	return mysql.SqlDB.Table("account_info").Create(&accountInfo).Error
 }

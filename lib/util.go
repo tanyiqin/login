@@ -2,16 +2,20 @@ package lib
 
 import (
 	"crypto/md5"
+	"encoding/hex"
 	"math/rand"
 	"time"
 )
 
 // 生成32位MD5
-func MD5(text string, len int) ([]byte, []byte){
+func MD5(text string, salt []byte) string {
 	ctx := md5.New()
-	ctx.Write([]byte(text))
-	Salt := GetRandomString(32)
-	return ctx.Sum(Salt), Salt
+	ctx.Write(append([]byte(text), salt...))
+	return hex.EncodeToString(ctx.Sum(nil))
+}
+
+func Salt() []byte {
+	return GetRandomString(32)
 }
 
 //生成随机字符串

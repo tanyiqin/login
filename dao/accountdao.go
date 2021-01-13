@@ -5,6 +5,7 @@ import (
 	"login/lib"
 	"login/model"
 	"net/http"
+	"reflect"
 	"strconv"
 )
 
@@ -22,13 +23,19 @@ func AccountCreate(c *gin.Context) {
 	}
 }
 
-func AccountInfo(c *gin.Context) {
+func AccountLogin(c *gin.Context) {
 	AccountName := c.DefaultQuery("account_name", "")
+	Password := c.DefaultQuery("password","")
 	SdkType, _ := strconv.Atoi(c.DefaultQuery("sdk_type", "0"))
 	if accountInfo, err := lib.GetAccountByName(AccountName, SdkType); err != nil {
 		c.String(http.StatusNotFound, "get account err = %s", err.Error())
 	} else {
-		c.JSON(http.StatusOK, accountInfo)
+		salt := accountInfo.Salt
+		if reflect.DeepEqual(lib.MD5(Password, []byte(salt)), accountInfo.PassWord) {
+			c.JSON(http.StatusOK, gin.H{"account_id":accountInfo.AccountID})
+		} else {
+			c.String(http.StatusNotFound, "auth error")
+		}
 	}
 }
 

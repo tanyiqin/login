@@ -26,7 +26,7 @@ func main() {
 	accountGroup := router.Group("/account")
 	{
 		accountGroup.POST("/create", dao.AccountCreate)
-		accountGroup.GET("/info", dao.AccountInfo)
+		accountGroup.GET("/login", dao.AccountLogin)
 	}
 	router.Run()
 }
