@@ -1,20 +1,17 @@
 package conf
 
 import (
-	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 )
 
-var (
-	SqlConf MySqlConf
-)
-
 type Config struct {
-	MySqlConf `yaml:"mysql"`
+	Mysql MysqlConfig `yaml:"mysql"`
+	Redis RedisConfig `yaml:"redis"`
+	Logger LoggerConfig `yaml:"logger"`
 }
 
-type MySqlConf struct {
+type MysqlConfig struct {
 	User	string `yaml:"user"`
 	Password	string	`yaml:"password"`
 	Protocl	string	`yaml:"protocl"`
@@ -24,31 +21,45 @@ type MySqlConf struct {
 	Args string `yaml:"args"`
 }
 
-func init() {
+type RedisConfig struct {
+	Addr string `yaml:"addr"`
+	Password string `yaml:"password"`
+	DB int `yaml:"db"`
+}
+
+type LoggerConfig struct {
+	Level string `yaml:"level" usage:"log level includes debug, info, error"`
+	Stdout bool `yaml:"stdout"`
+	File string `yaml:"file"`
+	Rotation bool `yaml:"rotation"`
+	MaxSize int `yaml:"maxsize"`
+	MaxAge int `yaml:"maxage"`
+	MaxBackups int `yaml:"maxbackups"`
+	LocalTime bool `yaml:"localtime"`
+	Compress bool `yaml:"compress"`
+}
+
+func ParseConfig(confPath string) Config {
 	var conf Config
-	confData, err := ioutil.ReadFile("conf/conf.yaml")
+	confData, err := ioutil.ReadFile(confPath)
 	if err != nil {
-		panic(1)
-		return
+		panic("read conf error")
 	}
 	err = yaml.Unmarshal(confData, &conf)
 	if err != nil {
-		fmt.Print("umarshal err =",err)
-		panic(2)
-		return
+		panic("unmarshal yaml error")
 	}
-	SqlConf = conf.MySqlConf
-	//yfile, err := os.Open("conf/conf.yaml")
-	//defer yfile.Close()
-	//if err != nil {
-	//	log.Panic("err in conf Open yaml,err=%v", err)
-	//}
-	//ydecode := yaml.NewDecoder(yfile)
-	//
-	//var c Config
-	//err = ydecode.Decode(&c)
-	//if err != nil {
-	//	log.Panic("err in conf Decode,err=%v", err)
-	//}
-	//conf = c
+	return conf
+}
+
+func (c Config) GetMysqlConfig() MysqlConfig {
+	return c.Mysql
+}
+
+func (c Config) GteRedisConfig() RedisConfig {
+	return c.Redis
+}
+
+func (c Config) GetLoggerConfig() LoggerConfig {
+	return c.Logger
 }

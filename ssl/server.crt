@@ -1,0 +1,59 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=CN, ST=SC, L=CD, O=TX, OU=GAME, CN=TYQ
+        Validity
+            Not Before: Feb 20 08:45:31 2021 GMT
+            Not After : Feb 20 08:45:31 2022 GMT
+        Subject: C=CN, ST=SC, O=TX, OU=GAME, CN=TYQ
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: (1024 bit)
+                Modulus:
+                    00:a4:bb:0b:b5:17:f8:55:dd:29:49:fd:ab:17:e0:
+                    7e:d8:4c:85:46:ac:c4:cc:6a:d7:6f:ea:d6:41:61:
+                    fd:0e:c0:77:a7:d4:c4:25:64:1e:30:62:40:d8:0a:
+                    49:78:52:63:e3:9f:49:41:80:cf:d8:e0:80:43:05:
+                    86:ff:27:c3:48:1c:48:d7:b2:7a:7a:68:9a:c5:34:
+                    f0:b5:a8:12:ca:97:f2:16:5b:47:0b:b6:35:d6:fa:
+                    d9:6d:9b:e6:50:ec:c2:eb:48:8a:ae:ed:2e:37:07:
+                    43:3c:82:22:83:26:a3:f1:36:b3:3d:88:31:6e:81:
+                    5a:ea:cb:77:cb:36:75:49:ef
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Comment: 
+                OpenSSL Generated Certificate
+            X509v3 Subject Key Identifier: 
+                18:15:CE:1B:93:0C:72:71:5A:A0:D3:5C:F4:13:12:7F:0E:69:B7:7C
+            X509v3 Authority Key Identifier: 
+                keyid:33:F6:36:9F:65:64:41:86:59:9E:6B:7F:CC:08:B4:B7:B5:F0:44:63
+
+    Signature Algorithm: sha256WithRSAEncryption
+         1d:9f:57:65:30:68:9f:9e:f2:d5:8d:c9:36:5f:a9:00:12:db:
+         67:1e:8a:df:0c:c2:d0:40:5d:ee:b0:29:98:73:99:ef:8f:e9:
+         ff:4d:94:ea:d9:43:d5:4b:30:03:98:e2:65:23:2a:e1:fb:61:
+         ec:8a:98:e6:c9:2a:34:45:82:3e:cb:9e:84:0a:a1:62:71:be:
+         58:64:35:94:f8:44:2d:d6:01:0b:96:55:92:f0:d0:8b:d2:97:
+         7c:ca:d4:d0:61:ff:20:b0:20:5d:14:1c:d8:d2:0a:9f:57:b7:
+         fa:14:15:f7:8b:72:cb:6b:2a:b1:ee:92:9e:40:ce:06:ab:82:
+         6d:b8
+-----BEGIN CERTIFICATE-----
+MIIChjCCAe+gAwIBAgIBATANBgkqhkiG9w0BAQsFADBRMQswCQYDVQQGEwJDTjEL
+MAkGA1UECAwCU0MxCzAJBgNVBAcMAkNEMQswCQYDVQQKDAJUWDENMAsGA1UECwwE
+R0FNRTEMMAoGA1UEAwwDVFlRMB4XDTIxMDIyMDA4NDUzMVoXDTIyMDIyMDA4NDUz
+MVowRDELMAkGA1UEBhMCQ04xCzAJBgNVBAgMAlNDMQswCQYDVQQKDAJUWDENMAsG
+A1UECwwER0FNRTEMMAoGA1UEAwwDVFlRMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCB
+iQKBgQCkuwu1F/hV3SlJ/asX4H7YTIVGrMTMatdv6tZBYf0OwHen1MQlZB4wYkDY
+Ckl4UmPjn0lBgM/Y4IBDBYb/J8NIHEjXsnp6aJrFNPC1qBLKl/IWW0cLtjXW+tlt
+m+ZQ7MLrSIqu7S43B0M8giKDJqPxNrM9iDFugVrqy3fLNnVJ7wIDAQABo3sweTAJ
+BgNVHRMEAjAAMCwGCWCGSAGG+EIBDQQfFh1PcGVuU1NMIEdlbmVyYXRlZCBDZXJ0
+aWZpY2F0ZTAdBgNVHQ4EFgQUGBXOG5MMcnFaoNNc9BMSfw5pt3wwHwYDVR0jBBgw
+FoAUM/Y2n2VkQYZZnmt/zAi0t7XwRGMwDQYJKoZIhvcNAQELBQADgYEAHZ9XZTBo
+n57y1Y3JNl+pABLbZx6K3wzC0EBd7rApmHOZ74/p/02U6tlD1UswA5jiZSMq4fth
+7IqY5skqNEWCPsuehAqhYnG+WGQ1lPhELdYBC5ZVkvDQi9KXfMrU0GH/ILAgXRQc
+2NIKn1e3+hQV94tyy2sqse6SnkDOBquCbbg=
+-----END CERTIFICATE-----

@@ -1,12 +1,19 @@
 package dao
 
 import (
+	"context"
 	"github.com/gin-gonic/gin"
 	"login/lib"
 	"login/model"
+	"login/redis"
 	"net/http"
 	"reflect"
 	"strconv"
+	"time"
+)
+
+const (
+	tokenTTL = 5 * time.Minute
 )
 
 func AccountCreate(c *gin.Context) {
@@ -32,47 +39,19 @@ func AccountLogin(c *gin.Context) {
 	} else {
 		salt := accountInfo.Salt
 		if reflect.DeepEqual(lib.MD5(Password, []byte(salt)), accountInfo.PassWord) {
-			c.JSON(http.StatusOK, gin.H{"account_id":accountInfo.AccountID})
+			token := lib.GetRandomString(16)
+			status := redis.RedisDB.Set(context.Background(), AccountName + "|" + strconv.Itoa(SdkType), token, tokenTTL)
+			if status.Err() != nil {
+				c.String(http.StatusNotFound, "gene token error =", err)
+			} else {
+				c.JSON(http.StatusOK, gin.H{"account_id":accountInfo.AccountID, "token":token})
+			}
 		} else {
 			c.String(http.StatusNotFound, "auth error")
 		}
 	}
 }
 
-//func MustLogin() gin.HandlerFunc{ // 必须登录
-//	return func(c *gin.Context) {
-//		if _, status := c.GetQuery("token"); !status {
-//			c.String(http.StatusUnauthorized, "queshao token")
-//			c.Abort()
-//		}
-//		// c.Next()
-//	}
-//}
-//
-//func GetTopicDetail(c *gin.Context) {
-//	c.JSON(200, model.CreateTopic(101,"tizibiaoti"))
-//}
-//
-//func GetTopicList(c *gin.Context) {
-//	query:=model.TopicQuery{}
-//	err := c.BindQuery(&query)
-//	if err != nil {
-//		c.String(400, "param error%s", err.Error())
-//	} else {
-//		c.JSON(200, query)
-//	}
-//}
-//
-//func NewTopic(c *gin.Context) {
-//	Topic := model.Topic{}
-//	err := c.BindJSON(&Topic)
-//	if err != nil {
-//		c.String(400, "param error%s", err.Error())
-//	} else {
-//		c.JSON(200, Topic)
-//	}
-//}
-//
-//func DeleteTopic(c *gin.Context) {
-//	c.String(200, "shanchu")
-//}
+func Test(c *gin.Context) {
+	panic("test")
+}
